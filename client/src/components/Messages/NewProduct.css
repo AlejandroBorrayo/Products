@@ -1,0 +1,17 @@
+.caja { 
+    display: flex;
+    align-items: center;
+    font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; 
+    color: #ffffff; 
+    height: 130px;
+    font-size: 28px; 
+    font-weight: 400; 
+    text-align: center; 
+    background: #369018; 
+    margin: 0 0 25px; 
+    overflow: hidden; 
+    padding: 20px; 
+    border-radius: 35px 0px 35px 0px; 
+    -moz-border-radius: 35px 0px 35px 0px; 
+    -webkit-border-radius: 35px 0px 35px 0px; 
+    border: 2px solid #323333;}
