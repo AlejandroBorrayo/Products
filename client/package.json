@@ -1,5 +1,6 @@
 {
   "name": "gestioncompras-client",
+  "author": "Emmanuel Alejandro Borrayo Cortes",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
