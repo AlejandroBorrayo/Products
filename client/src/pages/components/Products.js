@@ -13,21 +13,28 @@ import { useContext, useEffect, useState } from "react";
 import ContextProducts from "../../components/Context/Products.context"
 import axios from "axios"
 import ModalEditProduct from "../../components/Modal/modalEditProduct"
+import ModalDeleted from "../../components/Modal/ModalDeleted"
 
 export const Products = ({user}) => {
-    const [products, setProducts] = useState([])
-    const datos = useContext(ContextProducts.CtxProducts)
-    
-    
+  const [products, setProducts] = useState([])
+  const datos = useContext(ContextProducts.CtxProducts)
+
   useEffect(()=>{
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/products/${user._id}`)
-    .then(data=>{
-      setProducts(data.data)
-      datos.setUser(user)})
-    .catch(err=>console.log(err))
-  },[])
+    const GetProducts = ()=>{
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/products/${user._id}`)
+      .then(data=>{
+        setProducts(data.data)
+        datos.setUser(user)})
+      .catch(err=>console.log(err)) 
+    }
+    GetProducts()
+
+  },[datos,user])
 
  
+    
+    
+
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
@@ -72,6 +79,7 @@ export const Products = ({user}) => {
               <StyledTableCell align="center"><ModalEditProduct product={product}/> <Button  onClick={()=>{datos.DeleteProduct(product._id)}} color="error" style={{"marginLeft":"10px"}} variant="contained">Eliminar</Button></StyledTableCell>
             </StyledTableRow>
           ))}
+          {datos.open ? <ModalDeleted/>:<></>}
         </TableBody>
       </Table>
     </TableContainer>

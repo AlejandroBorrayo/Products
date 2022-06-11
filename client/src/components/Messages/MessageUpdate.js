@@ -4,23 +4,16 @@ import { useContext, useEffect, useState } from "react";
 import ContextProduct from "../Context/Products.context"
 
 
-export const Message = (props) => {
+export const MessageUpdate = (props) => {
   const datos = React.useContext(ContextProduct.CtxProducts)
   props.style.bgcolor = "transparent"
   props.style.height = "130px"
   props.style.border= '0'
-    setTimeout(()=>{
-    datos.setShowMessage(false)
-    datos.setMessage("")
-    props.handleClose()
-    props.style.bgcolor = "background.paper"
-    props.style.height = "620px"
-    props.style.border = "2px solid #000"
-  },1500)
+
 
   return (
     <div >
-        <p className='caja'>{datos.message}</p>
+        <p className='caja'>ee</p>
     </div>
   )
 }

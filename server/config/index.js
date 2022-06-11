@@ -13,12 +13,19 @@ module.exports = (app) => {
   app.set("trust proxy", 1);
 
 
-  app.use(
-    cors({
-      credentials: true,
-      origin: process.env.ORIGIN || "http://localhost:3000",
-    })
-  );
+  app.use(cors())
+  
+  const whitelist = ["localhost4000"]
+  const corsOptions = {
+      origin:(origin,callback)=>{
+          const existe = whitelist.some(dominio => dominio.origin);
+          if(existe){
+              callback(null,true)
+          }else{
+              callback(new Error("No permitido por CORS"))
+          }
+      }
+  }
 
   app.use(logger("dev"));
 

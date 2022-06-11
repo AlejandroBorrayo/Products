@@ -7,36 +7,42 @@ import {Message} from "../Messages/Message"
 import ContextProduct from "../Context/Products.context"
 
 
-  export default function ModalEditProduct(props) {
+  export default function ModalDeleted(props) {
       
-    const [open, setOpen] = React.useState(false);
     const datos = React.useContext(ContextProduct.CtxProducts)
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleOpen = () => datos.setOpen(true);
+    const handleClose = () => datos.setOpen(false);
+    console.log(datos.ShowMessage)
     const [style, setStyle] = React.useState({
       position: 'absolute',
       top: '50%',
       left: '50%',
-      height:"620px",
+      height:"130px",
       transform: 'translate(-50%, -50%)',
       width: "30%",
-      bgcolor: 'background.paper',
-      border: '2px solid #000',
+      bgcolor: 'transparent',
+      border: '0',
       borderRadius:"20px",
       boxShadow: 24,
       p: 4,
     })
+    setTimeout(()=>{
+        datos.setOpen(false)
+        datos.setDeleted("")
+    },1500)
+
     return (
       <React.Fragment>
-        <Button onClick = {handleOpen} variant="contained">Editar</Button>
         <Modal
-          open={open}
+          open={datos.open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
           <Box sx={style} className='modalLogin'>
-            <FormEditProduct setOpen={setOpen} {...props}/> 
+                <div >
+                    <p className='caja'>{datos.deleted}</p>
+                </div>
           </Box>
         </Modal>
       </React.Fragment>

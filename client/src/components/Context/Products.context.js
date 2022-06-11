@@ -8,9 +8,11 @@ function ProductsContext(props) {
   const [price,setPrice] = useState(null)
   const [user, setUser] = useState()
   const [updateProduct, setUpdateProduct] = useState({})
-  const [products, setProducts] = useState([])
   const [ShowMessage, setShowMessage] = useState(false)
   const [message, setMessage] = useState("")
+  const [deleted, setDeleted] = useState("")
+  const [open, setOpen] = useState(false);
+
 
 
   const CreateNewProduct=(e)=>{
@@ -32,12 +34,23 @@ function ProductsContext(props) {
 
   const DeleteProduct = (id)=>{
     axios.delete(`${process.env.REACT_APP_SERVER_URL}/products/${id}`)
-    .then(res=>console.log(res))
+    .then(res=>{
+      setDeleted(res.data.message)
+      setOpen(true)
+    })
     .catch(err=>console.log(err))
   }
 
   const UpdateProduct = (product)=>{
     axios.put(`${process.env.REACT_APP_SERVER_URL}/products/${product.id}`,product)
+    .then(res=>{
+      setMessage(res.data.message)
+    })
+    .catch(console.log())
+  }
+
+  const UpdateProfile = (profile)=>{
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/profile/${profile.id}`,profile)
     .then(res=>{
       setShowMessage(true)
       setMessage(res.data.message)
@@ -51,8 +64,8 @@ function ProductsContext(props) {
 
   return (
     <CtxProducts.Provider value={{setUser, setProduct, setCategory, 
-    setPrice, CreateNewProduct, DeleteProduct, setUpdateProduct,UpdateProduct,
-     products,setShowMessage,ShowMessage,message,setProducts,setMessage}} >
+    setPrice, CreateNewProduct, DeleteProduct, setUpdateProduct,UpdateProduct
+    ,setShowMessage,ShowMessage,message,setMessage, deleted, setDeleted, open, setOpen, UpdateProfile}} >
         {props.children}
     </CtxProducts.Provider>
   );

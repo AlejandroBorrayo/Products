@@ -17,8 +17,10 @@ export const FormEditProduct = (props) => {
           category,
           price,
       } 
+      datos.setOpen(true)
+
       datos.UpdateProduct(update)
-      
+
   }
 
 

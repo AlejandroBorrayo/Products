@@ -12,9 +12,11 @@ const Navbar = (props) => {
         {props.user ? (
           <>
             <Link to="/"><img src={logo} alt="logo"/></Link>
-            <button className="nav-logoutbtn" onClick={props.handleLogout}>
-              Logout
-            </button>
+            <div>
+              <Link to={`/user`}><img className="pictureProfile" src={props.user.avatar} alt="profile"/></Link>
+              <button className="nav-logoutbtn" onClick={props.handleLogout}>Logout</button>
+            </div>
+
           </>
         ) : (
           
